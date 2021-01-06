@@ -31,8 +31,8 @@ function getHTML(result) {
   const linkCss = '<link rel="stylesheet" href="./timer.css">'
   const scriptJS = '<script src="./timer.js"></script>'
   const targetHTML = path.join(__dirname, '/timer/timer.html')
-  result.replace(regCss, linkCss).replace(regScript, scriptJS)
-  fs.writeFile(targetHTML, result, (err) => {
+  const newStr = result.replace(regCss, linkCss).replace(regScript, scriptJS)
+  fs.writeFile(targetHTML, newStr, (err) => {
     if (err) return console.log('写入html文件失败,' + err.message)
     console.log('写入html文件成功')
   })
