@@ -1,5 +1,4 @@
 // 导入
-const { urlencoded } = require('express')
 const express = require('express')
 // 创建服务器
 const app = express()
