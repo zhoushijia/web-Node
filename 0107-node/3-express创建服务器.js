@@ -10,7 +10,7 @@ app.get('/news', (req, res) => {
   res.send('news')
 })
 app.post('/', (req, res) => {
-  // req.query 相当于 {fpath,query} = url.parse(req.url,true)
+  // req.query 相当于 {pathname,query} = url.parse(req.url,true)
   res.send(req.query)
 })
 // 启动服务器 创建端口
