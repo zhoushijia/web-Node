@@ -1,0 +1,17 @@
+{
+  "name": "handsome",
+  "version": "1.0.0",
+  "description": "让你变帅的一个包QaQ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "handsome",
+    "dateFormat",
+    "htmlEscape",
+    "htmlUnEscape"
+  ],
+  "author": "ZSJ",
+  "license": "ISC"
+}
