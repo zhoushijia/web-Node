@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <script>
+      // ajax请求得到后端跨域处理后返回的数据
+      $.ajax({
+        type: 'GET',
+        url: 'http://localhost:3000/user',
+        success(res) {
+          console.log(res)
+        }
+      })
+    </script>
+  </body>
+</html>
