@@ -5,16 +5,19 @@ module.exports = {
     // req.body = '解析之后的结果';
     // 想接受前端的 POST 请求的数据
     // data 是一个监听传输过程的一个事件
-    let arr = []
+    // let arr = []
+    let str = ''
     req.on('data', (chunk) => {
-      arr.push(chunk)
+      str += chunk
+      // arr.push(chunk)
     })
-    arr.join(',')
+
     req.on('end', () => {
+      // arr.join(',')
       if (obj.extended) {
         // 第三方插件实现post数据 // 用第三方的 qs 模块解析
       } else {
-        req.body = querystring.parse(arr)
+        req.body = querystring.parse(str)
       }
       next()
     })
