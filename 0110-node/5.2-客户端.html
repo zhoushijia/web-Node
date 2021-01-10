@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>客户端发ajax请求</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <button id="jsonpBtn">jsonp</button>
+    <button id="getBtn">get</button>
+    <button id="postBtn">post</button>
+    <button id="deleteBtn">delete</button>
+
+    <script>
+      $('#jsonpBtn').on('click', function () {
+        $.ajax({
+          dataType: 'jsonp',
+          url: 'http://localhost:3000/api/jsonp',
+          success(res) {
+            console.log(res)
+          }
+        })
+      })
+
+      $('#getBtn').on('click', function () {
+        $.ajax({
+          type: 'get',
+          data: { name: 'zs', id: 111 },
+          url: 'http://localhost:3000/api/get',
+          success(res) {
+            console.log(res)
+          }
+        })
+      })
+
+      $('#postBtn').on('click', function () {
+        $.ajax({
+          type: 'post',
+          data: { name: 'zs', id: 111 },
+          url: 'http://localhost:3000/api/post',
+          success(res) {
+            console.log(res)
+          }
+        })
+      })
+
+      $('#deleteBtn').on('click', function () {
+        $.ajax({
+          type: 'delete',
+          data: { name: 'zs', id: 111 },
+          url: 'http://localhost:3000/api/delete',
+          success(res) {
+            console.log(res)
+          }
+        })
+      })
+    </script>
+  </body>
+</html>
