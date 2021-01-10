@@ -21,8 +21,8 @@ router.post('/post', (req, res) => {
     data: body
   })
 })
-// delet请求
-router.post('/delete', (req, res) => {
+// delete请求
+router.delete('/delete', (req, res) => {
   res.send({
     status: 0, // 0表示请求成功, 1表示失败
     msg: 'delete请求成功'

@@ -10,8 +10,50 @@
     <button id="getBtn">GET</button>
     <button id="postBtn">POST</button>
     <button id="deleteBtn">DELETE</button>
+    <button id="jsonpBtn">JSONP</button>
     <script>
-      $('#getBtn')
+      $('#getBtn').on('click', function () {
+        $.ajax({
+          type: 'GET',
+          url: 'http://127.0.0.1/api/get',
+          data: { name: 'zs', age: 18 },
+          success(res) {
+            console.log(res)
+          }
+        })
+      })
+
+      $('#postBtn').on('click', function () {
+        $.ajax({
+          type: 'POST',
+          url: 'http://127.0.0.1/api/post',
+          data: { name: 'zs', age: 18 },
+          success(res) {
+            console.log(res)
+          }
+        })
+      })
+
+      $('#deleteBtn').on('click', function () {
+        $.ajax({
+          type: 'DELETE',
+          url: 'http://127.0.0.1/api/delete',
+          success(res) {
+            console.log(res)
+          }
+        })
+      })
+
+      //   jsonp前端请求
+      $('#jsonpBtn').on('click', function () {
+        $.ajax({
+          dataType: 'jsonp',
+          url: 'http://127.0.0.1/api/jsonp',
+          success(res) {
+            console.log(res)
+          }
+        })
+      })
     </script>
   </body>
 </html>
