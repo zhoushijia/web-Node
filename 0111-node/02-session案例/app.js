@@ -3,6 +3,9 @@ const express = require('express')
 // 创建 express 的服务器实例
 const app = express()
 
+app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
+
 const session = require('express-session')
 app.use(
   session({
