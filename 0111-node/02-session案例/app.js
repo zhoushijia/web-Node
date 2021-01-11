@@ -4,11 +4,13 @@ const express = require('express')
 const app = express()
 
 const session = require('express-session')
-app.use({
-  secret: 'aaaaaa',
-  resave: false,
-  saveuninitialized: true
-})
+app.use(
+  session({
+    secret: 'aaaaaa',
+    resave: false,
+    saveuninitialized: true
+  })
+)
 
 // 托管静态页面
 app.use(express.static('./pages'))
@@ -31,11 +33,22 @@ app.post('/api/login', (req, res) => {
 // 获取用户姓名的接口
 app.get('/api/username', (req, res) => {
   // TODO_03：请从 Session 中获取用户的名称，响应给客户端
+  if (!req.session.isLogin) res.send({ status: 1, msg: '获取信息失败' })
+  res.send({
+    status: 0,
+    msg: '获取信息成功',
+    data: res.session.user
+  })
 })
 
 // 退出登录的接口
 app.post('/api/logout', (req, res) => {
   // TODO_04：清空 Session 信息
+  req.session.destroy()
+  res.send({
+    status: 0,
+    msg: '退出成功'
+  })
 })
 
 // 调用 app.listen 方法，指定端口号并启动web服务器
