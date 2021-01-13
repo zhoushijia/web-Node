@@ -11,7 +11,6 @@ exports.reguser = (req, res) => {
   //   这里用@escook/express-joi和@hapi/joi实现了用户和密码校验
   // 判断用户名和密码是否为空
   //   if (!userInfo.username || !userInfo.password) {
-  //     // return res.send({ status: 1, msg: '用户名或密码不能为空' })
   //     return res.cc('用户名或密码不能为空')
   //   }
   // 从数据库调取用户名 唯一
@@ -37,12 +36,24 @@ exports.reguser = (req, res) => {
       //   if (results.affectedRows !== 1) return res.send({ status: 1, msg: '注册失败，请重新尝试' })
       if (results.affectedRows !== 1) return res.cc('注册失败，请重新尝试')
       //   res.send({ status: 0, msg: '注册成功' })
-      res.send('注册成功', 0)
+      res.cc('注册成功', 0)
     })
   })
 }
 
 // 登录
 exports.login = (req, res) => {
-  res.send('login OK')
+  const userInfo = req.body
+  const sqlStr = 'select * from users where username=?'
+  db.query(sqlStr, userInfo.username, (err, results) => {
+    //   sql语句执行错误
+    if (err) return res.cc(err)
+    // 查询结果不为1
+    if (results.length !== 1) return res.cc('登陆失败')
+    // bcryptjs比较输入密码与数据库密码
+    const compareBcrypt = bcryptjs.compareSync(userInfo.password, results[0].password)
+    // 如果compareBcrypt为false 则说明密码输入错误
+    if (!compareBcrypt) return res.cc('登录失败')
+    res.cc('登录成功', 0)
+  })
 }

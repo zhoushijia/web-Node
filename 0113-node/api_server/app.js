@@ -8,8 +8,6 @@ const app = express()
 const userRouter = require('./router/user')
 // 导入跨域包
 const cors = require('cors')
-// 导入定义规则包
-const joi = require('@hapi/joi')
 
 // 中间件
 // 实现跨域
