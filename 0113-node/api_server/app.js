@@ -5,7 +5,7 @@ const cors = require('cors')
 // 生成app 服务器
 const app = express()
 // 导入user路由
-const routerUser = require('./router/user')
+const userRouter = require('./router/user')
 
 // 中间件
 // 实现跨域
@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 
 // 路由
-app.use('/api', routerUser)
+app.use('/api', userRouter)
 
 // 端口
 app.listen(3007, () => {

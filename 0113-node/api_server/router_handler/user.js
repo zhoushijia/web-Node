@@ -3,5 +3,5 @@ exports.reguser = (req, res) => {
   res.send('reg OK')
 }
 exports.login = (req, res) => {
-  res.send('reg OK')
+  res.send('login OK')
 }
