@@ -12,10 +12,12 @@ exports.reguser = (req, res) => {
   }
   // 从数据库调取用户名 唯一
   const sqlStr = 'select * from users where username=?'
+
+  // db.query()是一个异步函数
   db.query(sqlStr, userInfo.username, (err, results) => {
     // sql查询错误
     if (err) return res.send({ status: 1, msg: err.message })
-    // 判断用户是否已经被注册
+    // 判断用户是否已经被注册 sql查询结果results是一个数组
     if (results.length > 0) return res.send({ status: 1, msg: '用户名已被占用' })
     res.send('可以注册')
   })
