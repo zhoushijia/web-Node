@@ -8,11 +8,12 @@ const bcryptjs = require('bcryptjs')
 exports.reguser = (req, res) => {
   // 得到前端请求来的数据
   const userInfo = req.body
+  //   这里用@escook/express-joi和@hapi/joi实现了用户和密码校验
   // 判断用户名和密码是否为空
-  if (!userInfo.username || !userInfo.password) {
-    // return res.send({ status: 1, msg: '用户名或密码不能为空' })
-    return res.cc('用户名或密码不能为空')
-  }
+  //   if (!userInfo.username || !userInfo.password) {
+  //     // return res.send({ status: 1, msg: '用户名或密码不能为空' })
+  //     return res.cc('用户名或密码不能为空')
+  //   }
   // 从数据库调取用户名 唯一
   const sqlStr = 'select * from users where username=?'
 

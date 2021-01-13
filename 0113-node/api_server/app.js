@@ -7,6 +7,9 @@ const app = express()
 // 导入user路由
 const userRouter = require('./router/user')
 
+// 导入定义规则包
+const joi = require('@hapi/joi')
+
 // 中间件
 // 实现跨域
 app.use(cors())
@@ -25,6 +28,14 @@ app.use((req, res, next) => {
 
 // 路由
 app.use('/api', userRouter)
+
+// 校验后错误中间件
+app.use((err, req, res, next) => {
+  // 判断 err 是否是由@hapi/joi校验引起的err
+  if (err instanceof joi.ValidationError) return res.cc(err)
+  // 未知错误
+  res.cc(res)
+})
 
 // 端口
 app.listen(3007, () => {
