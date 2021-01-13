@@ -14,6 +14,15 @@ app.use(cors())
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 
+// 优化res.send
+app.use((req, res, next) => {
+  // status放在最后，默认值为1，可选传递属性
+  res.cc = (err, status = 1) => {
+    res.send({ status, err: err instanceof Error ? err.message : err })
+  }
+  next()
+})
+
 // 路由
 app.use('/api', userRouter)
 
