@@ -1,5 +1,7 @@
 // 导入数据库连接
 const db = require('../db/db')
+// 导入加密包
+const bcryptjs = require('bcryptjs')
 
 // 路由处理函数
 // 注册
