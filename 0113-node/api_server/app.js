@@ -1,12 +1,13 @@
 // 导入express包
 const express = require('express')
-// 导入跨域包
-const cors = require('cors')
+
 // 生成app 服务器
 const app = express()
+
 // 导入user路由
 const userRouter = require('./router/user')
-
+// 导入跨域包
+const cors = require('cors')
 // 导入定义规则包
 const joi = require('@hapi/joi')
 
@@ -17,25 +18,14 @@ app.use(cors())
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 
-// 优化res.send
-app.use((req, res, next) => {
-  // status放在最后，默认值为1，可选传递属性
-  res.cc = (err, status = 1) => {
-    res.send({ status, err: err instanceof Error ? err.message : err })
-  }
-  next()
-})
+//? 优化res.send  包封装 使代码更具观赏性
+app.use(require('./middleware/optimize'))
 
-// 路由
+//! 路由入口
 app.use('/api', userRouter)
 
 // 校验后错误中间件
-app.use((err, req, res, next) => {
-  // 判断 err 是否是由@hapi/joi校验引起的err
-  if (err instanceof joi.ValidationError) return res.cc(err)
-  // 未知错误
-  res.cc(res)
-})
+app.use(require('./middleware/err'))
 
 // 端口
 app.listen(3007, () => {
