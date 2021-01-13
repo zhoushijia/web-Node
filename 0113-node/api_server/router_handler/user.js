@@ -21,7 +21,16 @@ exports.reguser = (req, res) => {
     if (err) return res.send({ status: 1, msg: err.message })
     // 判断用户是否已经被注册 sql查询结果results是一个数组
     if (results.length > 0) return res.send({ status: 1, msg: '用户名已被占用' })
-    res.send('可以注册')
+    // 密码加密
+    userInfo.password = bcryptjs.hashSync(userInfo.password, 10)
+    const sqlInsertStr = 'insert into users set ?'
+    db.query(sqlInsertStr, { username: userInfo.username, password: userInfo.password }, (err, results) => {
+      // sql插入代码出错
+      if (err) return res.send({ status: 1, msg: err.message })
+      // 插入失败
+      if (results.affectedRows !== 1) return res.send({ status: 1, msg: '注册失败，请重新尝试' })
+      res.send({ status: 0, msg: '注册成功' })
+    })
   })
 }
 
