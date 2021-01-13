@@ -2,6 +2,10 @@
 const db = require('../db/db')
 // 导入加密包
 const bcryptjs = require('bcryptjs')
+// 导入JWT包
+const jwt = require('jsonwebtoken')
+// 导入token密匙文件
+const config = require('../config')
 
 // 路由处理函数
 // 注册
@@ -54,6 +58,15 @@ exports.login = (req, res) => {
     const compareBcrypt = bcryptjs.compareSync(userInfo.password, results[0].password)
     // 如果compareBcrypt为false 则说明密码输入错误
     if (!compareBcrypt) return res.cc('登录失败')
-    res.cc('登录成功', 0)
+    // 登录成功
+    //  将用户密码和图片置空
+    const user = { ...userInfo, password: '', user_pic: '' }
+    // 生成token
+    const token = jwt.sign(user, config.secretKey, { expiresIn: '10h' })
+    res.send({
+      status: 0,
+      msg: '登陆成功',
+      token: 'Bearer ' + token
+    })
   })
 }

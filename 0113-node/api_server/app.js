@@ -9,6 +9,11 @@ const userRouter = require('./router/user')
 // 导入跨域包
 const cors = require('cors')
 
+// 导入解析token包express - jwt
+const expressjwt = require('express-jwt')
+// 导入密匙配置
+const config = require('./config')
+
 // 中间件
 // 实现跨域
 app.use(cors())
@@ -18,6 +23,9 @@ app.use(express.json())
 
 //? 优化res.send  包封装 使代码更具观赏性
 app.use(require('./middleware/optimize'))
+
+// 自校验token
+app.use(expressjwt({ secret: config.secretKey, algorithms: ['HS256'] }).unless({ path: [/^\/api\//] }))
 
 //! 路由入口
 app.use('/api', userRouter)
