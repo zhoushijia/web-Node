@@ -10,9 +10,9 @@ const db = mysql.createPool({
 })
 
 // 测试用
-db.query('select * from users', (err, results) => {
-  if (err) throw err
-  console.log(results)
-})
+// db.query('select * from users', (err, results) => {
+//   if (err) throw err
+//   console.log(results)
+// })
 // 导出数据库
 module.exports = db
