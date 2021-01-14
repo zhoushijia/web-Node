@@ -8,6 +8,8 @@ const app = express()
 const userRouter = require('./router/user')
 // 导入userInfo路由
 const userinfoRouter = require('./router/userinfo')
+// 导入article路由
+const articleRouter = require('./router/article')
 // 导入跨域包
 const cors = require('cors')
 
@@ -32,6 +34,7 @@ app.use(expressjwt({ secret: config.secretKey, algorithms: ['HS256'] }).unless({
 //! 路由入口
 app.use('/api', userRouter)
 app.use('/my', userinfoRouter)
+app.use('/my/article', articleRouter)
 
 // 校验后错误中间件
 app.use(require('./middleware/err'))

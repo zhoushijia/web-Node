@@ -54,7 +54,7 @@ exports.updatepwd = (req, res) => {
   })
 }
 
-// 更新用户头衔
+// 更新用户头像
 exports.updateavatar = (req, res) => {
   const sql = 'update users set user_pic=? where id=?'
   db.query(sql, [req.body.avatar, req.user.id], (err, results) => {
