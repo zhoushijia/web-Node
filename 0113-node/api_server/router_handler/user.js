@@ -53,11 +53,11 @@ exports.login = (req, res) => {
     //   sql语句执行错误
     if (err) return res.cc(err)
     // 查询结果不为1
-    if (results.length !== 1) return res.cc('登陆失败')
+    if (results.length !== 1) return res.cc('用户名不存在,登陆失败')
     // bcryptjs比较输入密码与数据库密码
     const compareBcrypt = bcryptjs.compareSync(userInfo.password, results[0].password)
     // 如果compareBcrypt为false 则说明密码输入错误
-    if (!compareBcrypt) return res.cc('登录失败')
+    if (!compareBcrypt) return res.cc('密码错误,登录失败')
     // 登录成功
     //  将用户密码和图片置空
     const user = { ...userInfo, password: '', user_pic: '' }
