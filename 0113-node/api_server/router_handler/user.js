@@ -11,7 +11,6 @@ const config = require('../config')
 // 注册
 exports.reguser = (req, res) => {
   // 得到前端请求来的数据
-  const userInfo = req.body
   //   这里用@escook/express-joi和@hapi/joi实现了用户和密码校验
   // 判断用户名和密码是否为空
   //   if (!userInfo.username || !userInfo.password) {
@@ -21,7 +20,7 @@ exports.reguser = (req, res) => {
   const sqlStr = 'select * from users where username=?'
 
   // db.query()是一个异步函数
-  db.query(sqlStr, userInfo.username, (err, results) => {
+  db.query(sqlStr, req.body.username, (err, results) => {
     // sql查询错误
     // if (err) return res.send({ status: 1, msg: err.message })
     if (err) return res.cc(err)
@@ -30,9 +29,9 @@ exports.reguser = (req, res) => {
     if (results.length > 0) return res.cc('用户名已被占用')
 
     // 密码加密
-    userInfo.password = bcryptjs.hashSync(userInfo.password, 10)
+    req.body.password = bcryptjs.hashSync(req.body.password, 10)
     const sqlInsertStr = 'insert into users set ?'
-    db.query(sqlInsertStr, { username: userInfo.username, password: userInfo.password }, (err, results) => {
+    db.query(sqlInsertStr, req.body, (err, results) => {
       // sql插入代码出错
       //   if (err) return res.send({ status: 1, msg: err.message })
       if (err) return res.cc(err)
