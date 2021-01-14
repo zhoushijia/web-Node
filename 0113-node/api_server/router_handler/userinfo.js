@@ -56,5 +56,10 @@ exports.updatepwd = (req, res) => {
 
 // 更新用户头衔
 exports.updateavatar = (req, res) => {
-  res.send('ok')
+  const sql = 'update users set user_pic=? where id=?'
+  db.query(sql, [req.body.avatar, req.user.id], (err, results) => {
+    if (err) return res.cc(err)
+    if (results.affectedRows !== 1) return res.cc('头像修改失败')
+    res.cc('头像修改成功', 0)
+  })
 }

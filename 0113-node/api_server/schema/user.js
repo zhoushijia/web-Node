@@ -39,3 +39,12 @@ exports.updatepwd_schema = {
     newPwd: joi.not(joi.ref('oldPwd')).concat(pwd)
   }
 }
+
+// 图片规则
+exports.updateavatar_schema = {
+  body: {
+    // dataUri() 指的是如下格式的字符串数据：
+    // data:image/png;base64,VE9PTUFOWVNFQ1JFVFM=
+    avatar: joi.string().dataUri().required()
+  }
+}
