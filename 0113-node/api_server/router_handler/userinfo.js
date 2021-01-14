@@ -53,3 +53,8 @@ exports.updatepwd = (req, res) => {
     })
   })
 }
+
+// 更新用户头衔
+exports.updateavatar = (req, res) => {
+  res.send('ok')
+}

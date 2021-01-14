@@ -13,6 +13,8 @@ router.get('/userinfo', userinfoHandler.getinfo)
 router.post('/userinfo', expressjoi(userinfoSchema.userinfo_schema), userinfoHandler.updateinfo)
 // 更改用户密码
 router.post('/updatepwd', expressjoi(userinfoSchema.updatepwd_schema), userinfoHandler.updatepwd)
+// 更改用户头像
+router.post('/update/avatar', userinfoHandler.updateavatar)
 
 // 导出
 module.exports = router
