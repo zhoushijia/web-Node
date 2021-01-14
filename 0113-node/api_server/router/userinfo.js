@@ -11,6 +11,8 @@ const userinfoHandler = require('../router_handler/userinfo')
 router.get('/userinfo', userinfoHandler.getinfo)
 // 先验证用户信息
 router.post('/userinfo', expressjoi(userinfoSchema.userinfo_schema), userinfoHandler.updateinfo)
+// 更改用户密码
+router.post('/updatepwd', expressjoi(userinfoSchema.updatepwd), userinfoHandler.updatepwd)
 
 // 导出
 module.exports = router

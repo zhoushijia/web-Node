@@ -27,3 +27,14 @@ exports.userinfo_schema = {
       .required()
   }
 }
+
+const pwd = joi
+  .string()
+  .pattern(/^[\S]{6,12}$/)
+  .required()
+exports.updatepwd_schema = {
+  body: {
+    oldPwd: pwd,
+    newPwd: pwd
+  }
+}
