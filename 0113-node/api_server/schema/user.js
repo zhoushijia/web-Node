@@ -17,11 +17,13 @@ exports.userinfo_schema = {
     id: joi.number().integer().min(1).required(),
     nickname: joi
       .string()
+      // 非空字符 汉字也行
       .pattern(/^([\u4e00-\u9fa5]|[\S]){1,6}$/)
       .required(),
     email: joi
       .string()
-      .pattern(/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/)
+      // .pattern(/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/)
+      .email()
       .required()
   }
 }
