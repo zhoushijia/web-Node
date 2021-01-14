@@ -1,4 +1,4 @@
 // token密匙配置文件
 module.exports = {
-  secretKey: 'ruBan7Hao zhiZhang250'
+  secretKey: 'luBan7Hao zhiZhang250'
 }
