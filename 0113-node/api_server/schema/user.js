@@ -11,3 +11,17 @@ exports.reg_login_schema = {
       .required()
   }
 }
+
+exports.userinfo_schema = {
+  body: {
+    id: joi.number().integer().min(1).required(),
+    nickname: joi
+      .string()
+      .pattern(/^([\u4e00-\u9fa5]|[\S]){1,6}$/)
+      .required(),
+    email: joi
+      .string()
+      .pattern(/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/)
+      .required()
+  }
+}

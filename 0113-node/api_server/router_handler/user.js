@@ -60,7 +60,7 @@ exports.login = (req, res) => {
     if (!compareBcrypt) return res.cc('密码错误,登录失败')
     // 登录成功
     //  将用户密码和图片置空
-    const user = { ...userInfo, password: '', user_pic: '' }
+    const user = { ...results[0], password: '', user_pic: '' }
     // 生成token
     const token = jwt.sign(user, config.secretKey, { expiresIn: '10h' })
     res.send({

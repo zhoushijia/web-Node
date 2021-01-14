@@ -18,5 +18,14 @@ exports.getinfo = (req, res) => {
 
 // 更新用户信息
 exports.updateinfo = (req, res) => {
-  res.send('update')
+  const userinfo = req.body
+  // 这里需要判断前端传来的id与token的id一致，否则不能修改
+  if (userinfo.id !== req.user.id) return res.cc('更新用户信息失败')
+  const sqlStr = 'update users set ? where id=?'
+  db.query(sqlStr, [userinfo, userinfo.id], (err, results) => {
+    //   sql错误
+    if (err) return res.cc(err)
+    if (results.affectedRows !== 1) return res.cc('更新用户信息失败')
+    res.cc('更新信息成功', 0)
+  })
 }
