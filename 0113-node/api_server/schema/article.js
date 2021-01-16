@@ -8,6 +8,7 @@ const content = joi.string().required().allow('')
 // 两个值二选一
 const state = joi.string().valid('已发布', '草稿').required()
 
+// 新增文章
 exports.addArt = {
   body: {
     title,
