@@ -17,3 +17,15 @@ exports.addArt = {
     state
   }
 }
+
+const pagenum = joi.number().integer().min(1).required()
+const pagesize = joi.number().integer().min(1).required()
+// 文章列表
+exports.listArt = {
+  query: {
+    pagenum,
+    pagesize,
+    cate_id: joi.number().integer().min(1),
+    state: joi.string().valid('已发布', '草稿')
+  }
+}

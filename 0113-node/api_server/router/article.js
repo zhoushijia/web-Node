@@ -16,6 +16,6 @@ const articleHandler = require('../router_handler/article')
 // 中间件uploads.single得到文件数据req.file
 router.post('/add', uploads.single('cover_img'), expressjoi(article_schema.addArt), articleHandler.addArt)
 // 获取文章列表
-router.get('/list', articleHandler.listArt)
+router.get('/list', expressjoi(article_schema.listArt), articleHandler.listArt)
 
 module.exports = router

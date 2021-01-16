@@ -39,5 +39,23 @@ exports.addArt = (req, res) => {
 
 // 获取文章列表
 exports.listArt = (req, res) => {
-  res.send('ok')
+  const sql = 'select Id,title,pub_date,state,cate_id from articles where is_delete=0'
+  db.query(sql, (err, results) => {
+    if (err) return res.cc(err)
+    const total = results.length
+    if (total <= 0) return res.cc('文章列表为空')
+    const newResults = []
+    const s = req.query.pagesize
+    const n = req.query.pagenum
+    const last = total < s * n ? total : s * n
+    for (let i = s * (n - 1); i < last; i++) {
+      newResults.push(results[i])
+    }
+    res.send({
+      status: 0,
+      msg: '获取文章列表成功',
+      data: newResults,
+      total
+    })
+  })
 }
