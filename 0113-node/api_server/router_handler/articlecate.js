@@ -1,3 +1,5 @@
+//todo 改变数据的操作都需要先验证(查询)数据是否重复
+
 // 导入数据库对象
 const db = require('../db/db')
 
@@ -55,6 +57,24 @@ module.exports.cateByIdHandler = (req, res) => {
       status: 0,
       msg: '获取文章分类数据成功！',
       data: results[0]
+    })
+  })
+}
+
+// 更新文章分类和别名
+module.exports.updatecateHandler = (req, res) => {
+  //? 更新之前必须得先查询名字是否被占用
+  const sql = 'select * from article_cate where Id<>? and (name=? or alias=?)'
+  db.query(sql, [req.body.Id, req.body.name, req.body.alias], (err, results) => {
+    if (err) return res.cc(err)
+    if (results.length === 2) return res.cc('文章分类名和别名都已存在')
+    if (results.length === 1 && results[0].name === req.body.name) return res.cc('文章分类名已存在')
+    if (results.length === 1 && results[0].alias === req.body.alias) return res.cc('文章分类别名已存在')
+    const updateSql = 'update article_cate set ? where is_delete=0 and Id=?'
+    db.query(updateSql, [req.body, req.body.Id], (err, results) => {
+      if (err) return res.cc(err)
+      if (results.affectedRows !== 1) return res.cc('更新文章分类失败')
+      res.cc('更新文章分类成功', 0)
     })
   })
 }
