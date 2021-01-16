@@ -17,6 +17,7 @@ module.exports.catesHandler = (req, res) => {
   })
 }
 
+// 新增文章分类
 module.exports.addcatesHandler = (req, res) => {
   //? sql中需要判断分类名或别名是否被占用
   const sql = 'select * from article_cate where name=? or alias=?'
@@ -31,5 +32,15 @@ module.exports.addcatesHandler = (req, res) => {
       if (results.affectedRows !== 1) return res.cc('新增文章分类失败')
       res.cc('新增文章分类成功！', 0)
     })
+  })
+}
+
+// 根据id删除文章分类
+module.exports.deletecateHandler = (req, res) => {
+  const sql = 'update article_cate set is_delete=1 where Id=?'
+  db.query(sql, req.params.id, (err, results) => {
+    if (err) return res.cc(err)
+    if (results.affectedRows !== 1) return res.cc('删除文章分类失败')
+    res.cc('删除文章分类成功', 0)
   })
 }

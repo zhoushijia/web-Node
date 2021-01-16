@@ -11,6 +11,8 @@ const articleSchema = require('../schema/article')
 // 获取文章分类列表
 router.get('/cates', articleHandler.catesHandler)
 // 新增文章分类
-router.post('/addcates', expressjoi(articleSchema.add_cates_Schema), articleHandler.addcatesHandler)
+router.post('/addcates', expressjoi(articleSchema.add_cates_schema), articleHandler.addcatesHandler)
+// 删除文章分类
+router.get('/deletecate/:id', expressjoi(articleSchema.del_cate_schema), articleHandler.deletecateHandler)
 
 module.exports = router
