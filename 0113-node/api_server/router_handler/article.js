@@ -86,6 +86,7 @@ exports.getArtById = (req, res) => {
 
 // 更新文章
 exports.updateArtById = (req, res) => {
+  // 理论上应该先查询该文章是否存在
   if (!req.file || req.file.fieldname !== 'cover_img') return res.cc('图片文件必须上传')
   const artInfo = {
     ...req.body,
