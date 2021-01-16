@@ -29,3 +29,10 @@ exports.listArt = {
     state: joi.string().valid('已发布', '草稿')
   }
 }
+
+// 删除文章
+exports.delArt = {
+  params: {
+    id: joi.number().integer().min(1).required()
+  }
+}

@@ -59,3 +59,13 @@ exports.listArt = (req, res) => {
     })
   })
 }
+
+// 删除文章
+exports.delArtById = (req, res) => {
+  const sql = 'update articles set is_delete=1 where Id=?'
+  db.query(sql, req.params.id, (err, results) => {
+    if (err) return res.cc(err)
+    if (results.affectedRows !== 1) return res.cc('删除文章失败')
+    res.cc('删除文章成功', 0)
+  })
+}

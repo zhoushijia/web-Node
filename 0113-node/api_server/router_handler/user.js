@@ -61,7 +61,7 @@ exports.login = (req, res) => {
     //  将用户密码和图片置空
     const user = { ...results[0], password: '', user_pic: '' }
     // 生成token
-    const token = jwt.sign(user, config.secretKey, { expiresIn: '10h' })
+    const token = jwt.sign(user, config.secretKey, { expiresIn: '24h' })
     res.send({
       status: 0,
       msg: '登陆成功',

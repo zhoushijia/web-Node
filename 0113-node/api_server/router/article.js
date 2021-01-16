@@ -17,5 +17,7 @@ const articleHandler = require('../router_handler/article')
 router.post('/add', uploads.single('cover_img'), expressjoi(article_schema.addArt), articleHandler.addArt)
 // 获取文章列表
 router.get('/list', expressjoi(article_schema.listArt), articleHandler.listArt)
+// 删除文章
+router.get('/delete/:id', expressjoi(article_schema.delArt), articleHandler.delArtById)
 
 module.exports = router
