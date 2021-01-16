@@ -30,9 +30,10 @@ exports.listArt = {
   }
 }
 
-// 删除文章
-exports.delArt = {
+const id = joi.number().integer().min(1).required()
+// 文章id
+exports.artId = {
   params: {
-    id: joi.number().integer().min(1).required()
+    id
   }
 }

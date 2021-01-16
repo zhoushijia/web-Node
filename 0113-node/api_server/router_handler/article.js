@@ -69,3 +69,19 @@ exports.delArtById = (req, res) => {
     res.cc('删除文章成功', 0)
   })
 }
+
+// 获取文章详情
+exports.getArtById = (req, res) => {
+  const sql = 'select * from articles where is_delete=0 and Id=?'
+  db.query(sql, req.params.id, (err, results) => {
+    if (err) return res.cc(err)
+    if (results.length !== 1) return res.cc('获取文章详情失败')
+    res.send({
+      status: 0,
+      msg: '获取文章详情成功',
+      data: results[0]
+    })
+  })
+}
+
+
