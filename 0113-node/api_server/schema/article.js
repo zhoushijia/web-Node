@@ -37,3 +37,14 @@ exports.artId = {
     id
   }
 }
+
+// 更新文章
+exports.updateArtId = {
+  body: {
+    Id: id,
+    title,
+    cate_id,
+    content,
+    state
+  }
+}

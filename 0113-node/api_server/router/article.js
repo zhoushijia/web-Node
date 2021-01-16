@@ -21,5 +21,7 @@ router.get('/list', expressjoi(article_schema.listArt), articleHandler.listArt)
 router.get('/delete/:id', expressjoi(article_schema.artId), articleHandler.delArtById)
 // 获取文章详情
 router.get('/:id', expressjoi(article_schema.artId), articleHandler.getArtById)
+// 更新文章
+router.post('/edit', uploads.single('cover_img'), expressjoi(article_schema.updateArtId), articleHandler.updateArtById)
 
 module.exports = router

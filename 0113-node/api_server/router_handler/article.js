@@ -84,4 +84,20 @@ exports.getArtById = (req, res) => {
   })
 }
 
-
+// 更新文章
+exports.updateArtById = (req, res) => {
+  if (!req.file || req.file.fieldname !== 'cover_img') return res.cc('图片文件必须上传')
+  const artInfo = {
+    ...req.body,
+    // 服务器存储图片的路径
+    cover_img: path.join('/uploads', req.file.filename),
+    pub_date: new Date(),
+    author_id: req.user.id
+  }
+  const sql = 'update articles set ? where Id=?'
+  db.query(sql, [artInfo, req.body.Id], (err, results) => {
+    if (err) return res.cc(err)
+    if (results.affectedRows !== 1) return res.cc('更新文章失败！')
+    res.cc('更新文章成功！', 0)
+  })
+}
