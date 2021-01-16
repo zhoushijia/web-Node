@@ -44,3 +44,17 @@ module.exports.deletecateHandler = (req, res) => {
     res.cc('删除文章分类成功', 0)
   })
 }
+
+// 根据id获取文章分类
+module.exports.cateByIdHandler = (req, res) => {
+  const sql = 'select * from article_cate where is_delete=0 and Id=?'
+  db.query(sql, req.params.id, (err, results) => {
+    if (err) return res.cc(err)
+    if (results.length !== 1) return res.cc('获取文章分类数据失败！')
+    res.send({
+      status: 0,
+      msg: '获取文章分类数据成功！',
+      data: results[0]
+    })
+  })
+}

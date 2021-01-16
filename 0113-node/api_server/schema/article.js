@@ -8,8 +8,8 @@ exports.add_cates_schema = {
   }
 }
 
-// 删除分类
-exports.del_cate_schema = {
+// 文章分类id规则
+exports.cate_id_schema = {
   params: {
     id: joi.number().integer().min(1).required()
   }
